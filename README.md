@@ -1,2 +1,3 @@
 # dev-environment
-base on docker dev environment
+
+golang + nodejs dev environment for Docker
