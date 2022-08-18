@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  dev-environment:
+    image: "shynhan/dev-environment:latest"
+    container_name: "dev-environment"
+    restart: "unless-stopped"
+    hostname: "dev-environment"
+    network_mode: "bridge"
+    environment:
+      - LANG=en_US.UTF-8
+      - TZ=Asia/Shanghai
+      - SHELL=/bin/zsh
