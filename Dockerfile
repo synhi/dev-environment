@@ -21,7 +21,7 @@ RUN /bin/sh -c set -eux; DEBIAN_FRONTEND=noninteractive; \
   go install github.com/go-delve/delve/cmd/dlv@latest; \
   go install honnef.co/go/tools/cmd/staticcheck@latest; \
   go install golang.org/x/tools/gopls@latest; \
-  go clean -modcache; \
+  go clean -cache -modcache; \
   rm -rf /var/lib/apt/lists/*
 
 CMD ["/bin/sleep", "infinity"]
