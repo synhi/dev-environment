@@ -16,4 +16,6 @@ RUN /bin/sh -c set -eux; DEBIAN_FRONTEND=noninteractive; \
 
 ENV LANG=en_US.UTF-8 SHELL=/bin/zsh TZ=Asia/Shanghai
 
+WORKDIR /workspace
+
 CMD [ "/bin/sleep", "infinity" ]
