@@ -10,7 +10,8 @@ RUN /bin/sh -c set -eux; DEBIAN_FRONTEND=noninteractive; \
   sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster"/g' ~/.zshrc; \
   sed -i "s/# zstyle ':omz:update' mode disabled/zstyle ':omz:update' mode disabled/g" ~/.zshrc; \
   echo "zstyle ':omz:update' mode disabled" >> ~/.zshrc; \
-  curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && apt-get install -y nodejs && npm install -g pnpm; \
+  curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && apt-get install -y nodejs; \
+  npm -g install pnpm; npm -g cache clean --force; rm /root/.npm/_logs/*.log; \
   rm -rf /var/lib/apt/lists/*
 
 ENV LANG=en_US.UTF-8 SHELL=/bin/zsh TZ=Asia/Shanghai
