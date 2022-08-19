@@ -1,0 +1,12 @@
+#!/bin/bash
+set -eux
+
+function base() {
+  docker buildx build -t shynhan/dev-base:latest --no-cache $@ base/
+}
+
+function golang() {
+  docker buildx build -t shynhan/dev-golang:latest --no-cache $@ golang/
+}
+
+$@
