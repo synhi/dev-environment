@@ -1,4 +1,4 @@
-FROM shynhan/dev-base:latest
+FROM shynhan/dev-environment:base
 
 ENV PATH=/usr/local/go/bin:/root/go/bin:$PATH
 

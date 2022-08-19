@@ -8,6 +8,8 @@ RUN /bin/sh -c set -eux; DEBIAN_FRONTEND=noninteractive; \
   localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8; chsh -s $(which zsh); \
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended; \
   sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster"/g' ~/.zshrc; \
+  sed -i "s/# zstyle ':omz:update' mode disabled/zstyle ':omz:update' mode disabled/g" ~/.zshrc; \
+  echo "zstyle ':omz:update' mode disabled" >> ~/.zshrc; \
   curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && apt-get install -y nodejs && npm install -g pnpm; \
   rm -rf /var/lib/apt/lists/*
 

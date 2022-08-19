@@ -2,11 +2,11 @@
 set -eux
 
 function base() {
-  docker buildx build -t shynhan/dev-base:latest --no-cache $@ base/
+  docker buildx build -t shynhan/dev-environment:base --no-cache $@ base/
 }
 
-function golang() {
-  docker buildx build -t shynhan/dev-golang:latest --no-cache $@ golang/
+function latest() {
+  docker buildx build -t shynhan/dev-environment:latest --no-cache $@ latest/
 }
 
 $@
