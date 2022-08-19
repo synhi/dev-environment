@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   dev-environment:
-    image: "shynhan/dev-environment:latest"
+    image: "ghcr.io/synhi/dev-environment:latest"
     container_name: "dev-environment"
     restart: "unless-stopped"
     hostname: "dev-environment"
