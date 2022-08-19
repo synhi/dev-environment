@@ -1,12 +1,8 @@
 version: "3.9"
 services:
-  dev-environment:
-    image: "shynhan/dev-environment:latest"
-    container_name: "dev-environment"
+  dev-golang:
+    image: "shynhan/dev-golang:latest"
+    container_name: "dev-golang"
     restart: "unless-stopped"
-    hostname: "dev-environment"
+    hostname: "dev-golang"
     network_mode: "bridge"
-    environment:
-      - LANG=en_US.UTF-8
-      - TZ=Asia/Shanghai
-      - SHELL=/bin/zsh
