@@ -8,6 +8,7 @@ RUN /bin/sh -c set -eux; DEBIAN_FRONTEND=noninteractive; \
   ca-certificates curl wget netbase gnupg dirmngr procps iputils-ping iproute2 tzdata locales nano sudo \
   git openssh-client zsh g++ gcc libc6-dev make pkg-config python3 python3-pip; \
   localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8; chsh -s $(which zsh); \
+  git config --global init.defaultBranch main; \
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended; \
   sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster"/g' ~/.zshrc; \
   sed -i "s/# zstyle ':omz:update' mode disabled/zstyle ':omz:update' mode disabled/g" ~/.zshrc; \
