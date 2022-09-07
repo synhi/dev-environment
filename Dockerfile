@@ -15,7 +15,7 @@ RUN /bin/sh -c set -eux; DEBIAN_FRONTEND=noninteractive; \
   echo "zstyle ':omz:update' mode disabled" >> ~/.zshrc; \
   curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && apt-get install -y --no-install-recommends nodejs; \
   npm install -g npm pnpm; npm -g cache clean --force; rm /root/.npm/_logs/*.log; \
-  wget https://go.dev/dl/go1.19.linux-amd64.tar.gz -O go.tar.gz; \
+  wget https://go.dev/dl/go1.19.1.linux-amd64.tar.gz -O go.tar.gz; \
   rm -rf /usr/local/go && tar -C /usr/local -xzf go.tar.gz && rm go.tar.gz; \
   go install github.com/cweill/gotests/gotests@latest; \
   go install github.com/fatih/gomodifytags@latest; \
