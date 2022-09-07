@@ -40,9 +40,10 @@ function install_nodejs() {
 
 function install_go() {
   add g++ gcc libc6-dev make pkg-config
-  wget $1 -O go.tar.gz
-  rm -rf /usr/local/go && tar -C /usr/local -xzf go.tar.gz && rm go.tar.gz
-  export PAHT=/usr/local/go/bin:/root/go/bin:$PATH
+  wget "$1" -O go.tar.gz
+  tar -C /usr/local -xzf go.tar.gz
+  rm go.tar.gz
+  export PATH=/usr/local/go/bin:/root/go/bin:$PATH
   go install github.com/cweill/gotests/gotests@latest
   go install github.com/fatih/gomodifytags@latest
   go install github.com/josharian/impl@latest
@@ -57,6 +58,6 @@ base
 install_zsh
 install_python
 install_nodejs
-install_go https://go.dev/dl/go1.19.1.linux-amd64.tar.gz
+install_go 'https://go.dev/dl/go1.19.1.linux-amd64.tar.gz'
 
 clean $0
