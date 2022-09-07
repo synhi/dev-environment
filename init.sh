@@ -53,6 +53,7 @@ function install_go() {
   go clean -cache -modcache
 }
 
+base
 install_zsh
 install_python
 install_nodejs
