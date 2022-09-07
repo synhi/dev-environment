@@ -13,7 +13,7 @@ function clean() {
 
 function base() {
   apt-get update && apt-get upgrade -y
-  install locales tzdata ca-certificates curl wget netbase gnupg dirmngr procps iputils-ping iproute2 nano sudo git openssh-client
+  add locales tzdata ca-certificates curl wget netbase gnupg dirmngr procps iputils-ping iproute2 nano sudo git openssh-client
   localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
   git config --global init.defaultBranch main
 }
