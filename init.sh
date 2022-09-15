@@ -2,6 +2,9 @@
 set -eu
 
 export DEBIAN_FRONTEND=noninteractive
+export LANGUAGE=C.UTF-8
+export LC_ALL=C.UTF-8
+export LANG=C.UTF-8
 
 function add() {
   apt-get install -y --no-install-recommends $@
@@ -14,9 +17,10 @@ function clean() {
 
 function base() {
   apt-get update && apt-get upgrade -y
+  add apt-utils dialog
   add locales
   localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
-  add apt-utils dialog tzdata
+  export LANG=en_US.UTF-8
   add ca-certificates curl wget netbase gnupg dirmngr procps iputils-ping iproute2 nano sudo git openssh-client
   git config --global init.defaultBranch main
 }
