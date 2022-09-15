@@ -6,3 +6,5 @@ services:
     restart: "unless-stopped"
     hostname: "dev-environment"
     network_mode: "bridge"
+    environment:
+      - TZ=Asia/Shanghai
