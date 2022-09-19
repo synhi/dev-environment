@@ -17,10 +17,8 @@ function clean() {
 
 function base() {
   apt-get update && apt-get upgrade -y
-  add apt-utils dialog
-  add locales
+  add apt-utils dialog locales
   localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
-  export LANG=en_US.UTF-8
   add ca-certificates curl wget netbase gnupg dirmngr procps iputils-ping iproute2 nano sudo git openssh-client
   git config --global init.defaultBranch main
 }
