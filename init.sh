@@ -10,9 +10,10 @@ function add() {
   apt-get install -y --no-install-recommends $@
 }
 
+script_file=$0
 function clean() {
   rm -rf /var/lib/apt/lists/*
-  rm $1
+  rm $script_file
 }
 
 function base() {
@@ -27,7 +28,7 @@ function install_zsh() {
   add zsh
   chsh -s $(which zsh)
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-  sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster"/g' ~/.zshrc
+  # sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster"/g' ~/.zshrc
   sed -i "s/# zstyle ':omz:update' mode disabled/zstyle ':omz:update' mode disabled/g" ~/.zshrc
 }
 
@@ -60,8 +61,8 @@ function install_go() {
 
 base
 install_zsh
-install_python
+# install_python
 install_nodejs
 install_go 'https://go.dev/dl/go1.19.1.linux-amd64.tar.gz'
 
-clean $0
+clean
