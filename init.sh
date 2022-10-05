@@ -20,7 +20,7 @@ function base() {
   apt-get update && apt-get upgrade -y
   add apt-utils dialog locales
   localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
-  add ca-certificates curl wget netbase gnupg dirmngr procps iputils-ping iproute2 nano sudo git openssh-client
+  add ca-certificates curl wget netbase gnupg dirmngr procps iputils-ping iproute2 nano sudo git openssh-client # build-essential
   git config --global init.defaultBranch main
 }
 
@@ -38,7 +38,7 @@ function install_python() {
 
 function install_nodejs() {
   curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && apt-get install -y --no-install-recommends nodejs
-  npm install -g npm pnpm
+  npm install -g npm pnpm @go-task/cli
   npm -g cache clean --force
   rm /root/.npm/_logs/*.log
 }
@@ -61,8 +61,8 @@ function install_go() {
 
 base
 install_zsh
-# install_python
+install_python
 install_nodejs
-install_go 'https://go.dev/dl/go1.19.1.linux-amd64.tar.gz'
+install_go 'https://go.dev/dl/go1.19.2.linux-amd64.tar.gz'
 
 clean
