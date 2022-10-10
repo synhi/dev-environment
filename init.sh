@@ -38,7 +38,7 @@ function install_python() {
 
 function install_nodejs() {
   curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && apt-get install -y --no-install-recommends nodejs
-  npm install -g npm pnpm @go-task/cli
+  npm install -g npm pnpm
   npm -g cache clean --force
   rm /root/.npm/_logs/*.log
 }
