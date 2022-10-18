@@ -20,7 +20,7 @@ function base() {
   apt-get update && apt-get upgrade -y
   add apt-utils dialog locales
   localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
-  add ca-certificates curl wget procps iputils-ping iproute2 nano sudo git openssh-client build-essential pkg-config # netbase gnupg dirmngr
+  add ca-certificates curl wget procps iputils-ping iproute2 nano sudo git openssh-client netbase gnupg dirmngr # build-essential pkg-config
   git config --global init.defaultBranch main
 }
 
@@ -44,7 +44,7 @@ function install_nodejs() {
 }
 
 function install_go() {
-  # add g++ gcc libc6-dev make pkg-config
+  add g++ gcc libc6-dev make pkg-config
   wget "$1" -O go.tar.gz
   tar -C /usr/local -xzf go.tar.gz
   rm go.tar.gz
