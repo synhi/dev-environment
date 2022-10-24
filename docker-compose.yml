@@ -1,4 +1,13 @@
 version: "3.9"
+
+volumes:
+  workspace:
+    name: dev-workspace
+  vscode:
+    name: dev-vscode
+  go:
+    name: dev-go
+
 services:
   dev:
     image: "ghcr.io/synhi/dev-environment:latest"
@@ -8,3 +17,7 @@ services:
     network_mode: "bridge"
     environment:
       - TZ=Asia/Shanghai
+    volumes:
+      - workspace:/workspace
+      - vscode:/root/.vscode-server
+      - go:/root/go
