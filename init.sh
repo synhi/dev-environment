@@ -20,6 +20,9 @@ function base() {
   apt-get update && apt-get upgrade -y
   add apt-utils dialog locales
   localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+  update-locale LANG=en_US.UTF-8
+  update-locale LANGUAGE=en_US.UTF-8
+  update-locale LC_ALL=en_US.UTF-8
   add ca-certificates curl wget procps iputils-ping iproute2 nano sudo git openssh-client
   git config --global init.defaultBranch main
   add build-essential pkg-config # netbase gnupg dirmngr
@@ -49,6 +52,8 @@ function install_go() {
   wget "$1" -O go.tar.gz
   tar -C /usr/local -xzf go.tar.gz
   rm go.tar.gz
+  echo 'export PATH=$PATH:~/go/bin:/usr/local/go/bin' >>/etc/profile
+  echo 'export PATH=$PATH:~/go/bin:/usr/local/go/bin' >>/etc/zsh/zprofile
   # export PATH=/usr/local/go/bin:/root/go/bin:$PATH
   # go install github.com/cweill/gotests/gotests@latest
   # go install github.com/fatih/gomodifytags@latest
