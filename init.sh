@@ -47,7 +47,6 @@ function install_php() {
 }
 
 function install_nodejs() {
-  # curl -fsSL https://raw.githubusercontent.com/nodesource/distributions/master/deb/setup_lts.x | bash - && add nodejs
   curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && add nodejs
   npm install -g npm pnpm
   npm -g cache clean --force
