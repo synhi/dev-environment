@@ -74,6 +74,6 @@ install_zsh
 install_python
 install_php
 install_nodejs
-install_go 'https://go.dev/dl/go1.19.3.linux-amd64.tar.gz'
+install_go 'https://go.dev/dl/go1.19.4.linux-amd64.tar.gz'
 
 clean
