@@ -10,10 +10,9 @@ function add() {
   apt-get install -y $@ # --no-install-recommends
 }
 
-script_file=$0
 function clean() {
   rm -rf /var/lib/apt/lists/*
-  rm $script_file
+  rm $0
 }
 
 function base() {
