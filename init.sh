@@ -54,7 +54,7 @@ function install_nodejs() {
 
 function install_go() {
   # add g++ gcc libc6-dev make pkg-config
-  wget "$1" -O go.tar.gz
+  wget --quiet "$1" -O go.tar.gz
   tar -C /usr/local -xzf go.tar.gz
   rm go.tar.gz
   # export PATH=/usr/local/go/bin:/root/go/bin:$PATH
