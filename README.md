@@ -1,3 +1,3 @@
 # dev-environment
 
-python3 + php + golang + nodejs dev environment for Docker
+python3 + golang + nodejs dev environment for Docker
