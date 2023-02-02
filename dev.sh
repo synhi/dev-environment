@@ -56,36 +56,25 @@ install_nodejs() {
 }
 
 install_go() {
-  # apt-get install -y g++ gcc libc6-dev make pkg-config
   wget --quiet "$1" -O go.tar.gz
   tar -C /usr/local -xzf go.tar.gz
   rm go.tar.gz
-  # export PATH=/usr/local/go/bin:/root/go/bin:$PATH
-  # go install github.com/cweill/gotests/gotests@latest
-  # go install github.com/fatih/gomodifytags@latest
-  # go install github.com/josharian/impl@latest
-  # go install github.com/haya14busa/goplay/cmd/goplay@latest
-  # go install github.com/go-delve/delve/cmd/dlv@latest
-  # go install honnef.co/go/tools/cmd/staticcheck@latest
-  # go install golang.org/x/tools/gopls@latest
-  # go clean -cache -modcache
+}
+
+update_go() {
+  rm -rf /usr/go
+  install_go "$1"
 }
 
 init() {
   base
-  install_go 'https://go.dev/dl/go1.19.5.linux-amd64.tar.gz'
-  install_python
+  install_go 'https://go.dev/dl/go1.20.linux-amd64.tar.gz'
   install_nodejs
+  # install_python
+  # install_php
+
   backup_root
   clean
 }
 
 "$@"
-
-# base
-# install_omz
-# install_python
-# install_php
-# install_nodejs
-# install_go 'https://go.dev/dl/go1.19.5.linux-amd64.tar.gz'
-# clean

@@ -3,12 +3,6 @@ version: "3.9"
 volumes:
   root:
     name: dev-root
-  # workspace:
-  #   name: dev-workspace
-  # vscode:
-  #   name: dev-vscode
-  # go:
-  #   name: dev-go
 
 services:
   dev:
@@ -21,6 +15,3 @@ services:
       - TZ=Asia/Shanghai
     volumes:
       - root:/root
-      # - workspace:/workspace
-      # - vscode:/root/.vscode-server
-      # - go:/root/go
