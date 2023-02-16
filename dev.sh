@@ -50,7 +50,8 @@ install_php() {
 
 install_nodejs() {
   curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && apt-get install -y nodejs
-  npm install -g npm pnpm
+  npm remove -g corepack
+  npm install -g pnpm
   npm -g cache clean --force
   rm -rf /root/.npm/_logs/*.log
 }
@@ -68,7 +69,7 @@ update_go() {
 
 init() {
   base
-  install_go 'https://go.dev/dl/go1.20.linux-amd64.tar.gz'
+  install_go 'https://go.dev/dl/go1.20.1.linux-amd64.tar.gz'
   install_nodejs
   # install_python
   # install_php

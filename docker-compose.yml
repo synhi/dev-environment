@@ -7,11 +7,12 @@ volumes:
 services:
   dev:
     image: "ghcr.io/synhi/dev-environment:latest"
-    container_name: "dev-environment"
+    container_name: "dev"
     restart: "unless-stopped"
-    hostname: "dev-environment"
+    hostname: "dev"
     network_mode: "bridge"
     environment:
       - TZ=Asia/Shanghai
+      - SHELL=/bin/zsh
     volumes:
       - root:/root
