@@ -8,7 +8,7 @@ clean() {
 }
 
 add() {
-  apt-get install -y --no-install-recommends $@
+  apt-get install -y --no-install-recommends "$@"
 }
 
 base() {
@@ -33,7 +33,7 @@ install_omz() {
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
   sed -i "s/# zstyle ':omz:update' mode disabled/zstyle ':omz:update' mode disabled/g" ~/.zshrc
   # sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster"/g' ~/.zshrc
-  chsh -s $(which zsh)
+  chsh -s "$(which zsh)"
 }
 
 install_python() {
@@ -73,7 +73,6 @@ init() {
   install_nodejs
   # install_python
   # install_php
-
   backup_root
   clean
 }
