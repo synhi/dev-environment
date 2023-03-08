@@ -69,7 +69,7 @@ update_go() {
 
 init() {
   base
-  install_go 'https://go.dev/dl/go1.20.1.linux-amd64.tar.gz'
+  install_go 'https://go.dev/dl/go1.20.2.linux-amd64.tar.gz'
   install_nodejs
   # install_python
   # install_php
