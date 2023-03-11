@@ -71,7 +71,7 @@ init() {
   base
   install_go 'https://go.dev/dl/go1.20.2.linux-amd64.tar.gz'
   install_nodejs
-  # install_python
+  install_python
   # install_php
   backup_root
   clean
