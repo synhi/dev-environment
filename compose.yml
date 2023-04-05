@@ -1,8 +1,8 @@
 version: "3.9"
 
 volumes:
-  root:
-    name: dev-root
+  workspace:
+    name: workspace
 
 services:
   dev:
@@ -12,7 +12,7 @@ services:
     hostname: "dev"
     network_mode: "bridge"
     environment:
-      - TZ=Asia/Shanghai
       - SHELL=/bin/zsh
+      - TZ=Asia/Shanghai
     volumes:
-      - root:/root
+      - workspace:/workspace

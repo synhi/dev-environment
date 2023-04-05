@@ -1,7 +1,99 @@
 FROM debian:latest
-COPY [ "dev.sh", "/opt/" ]
-RUN [ "/bin/bash", "/opt/dev.sh", "init" ]
-# LANGUAGE=en_US.UTF-8 LC_ALL=en_US.UTF-8
-ENV SHELL=/bin/zsh LANG=en_US.UTF-8 PATH=$PATH:/root/go/bin:/usr/local/go/bin
-WORKDIR /root/workspace
+
+RUN DEBIAN_FRONTEND=noninteractive; \
+  set -eux; \
+  apt-get update; \
+  apt-get install -y \
+  pkg-config \
+  apt-utils \
+  dialog \
+  locales \
+  ; \
+  rm -rf /var/lib/apt/lists/*
+
+ENV LANG=en_US.UTF-8
+
+RUN DEBIAN_FRONTEND=noninteractive; \
+  set -eux; \
+  apt-get update; \
+  apt-get install -y \
+  ca-certificates \
+  netbase \
+  gnupg \
+  procps \
+  iputils-ping \
+  iproute2 \
+  openssh-client \
+  sudo \
+  curl \
+  wget \
+  nano \
+  git \
+  build-essential \
+  ; \
+  rm -rf /var/lib/apt/lists/*
+
+RUN set -eux; \
+  localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8; \
+  git config --global init.defaultBranch main; \
+  mkdir /workspace
+
+WORKDIR /workspace
+
 CMD [ "/bin/sleep", "infinity" ]
+
+# install zsh and ohmyzsh
+RUN DEBIAN_FRONTEND=noninteractive; \
+  set -eux; \
+  apt-get update; \
+  apt-get install -y zsh fonts-powerline; \
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended; \
+  sed -i "s/# zstyle ':omz:update' mode disabled/zstyle ':omz:update' mode disabled/g" ~/.zshrc; \
+  sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster"/g' ~/.zshrc; \
+  chsh -s "$(which zsh)"; \
+  rm -rf /var/lib/apt/lists/*
+
+# install python
+RUN DEBIAN_FRONTEND=noninteractive; \
+  set -eux; \
+  apt-get update; \
+  apt-get install -y python3 python3-pip; \
+  rm -rf /var/lib/apt/lists/*
+
+# install php
+# RUN DEBIAN_FRONTEND=noninteractive; \
+#   set -eux; \
+#   apt-get update; \
+#   apt-get install -y php-cli php-pear; \
+#   php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"; \
+#   php composer-setup.php; \
+#   php -r "unlink('composer-setup.php');"; \
+#   mv composer.phar /usr/local/bin/composer; \
+#   rm -rf /var/lib/apt/lists/*
+
+# install nodejs
+RUN DEBIAN_FRONTEND=noninteractive; \
+  set -eux; \
+  curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -; \
+  apt-get update; \
+  apt-get install -y nodejs; \
+  npm remove -g corepack; \
+  npm install -g npm pnpm @go-task/cli; \
+  npm -g cache clean --force; \
+  rm -rf /root/.npm; \
+  rm -rf /var/lib/apt/lists/*
+
+# install golang
+ENV PATH=/usr/local/go/bin:/root/go/bin:$PATH
+RUN set -eux; \
+  wget --quiet "https://go.dev/dl/go1.20.3.linux-amd64.tar.gz" -O go.tar.gz; \
+  tar -C /usr/local -xzf go.tar.gz; \
+  go install github.com/cweill/gotests/gotests@v1.6.0; \
+  go install github.com/fatih/gomodifytags@v1.16.0; \
+  go install github.com/josharian/impl@v1.1.0; \
+  go install github.com/haya14busa/goplay/cmd/goplay@v1.0.0; \
+  go install github.com/go-delve/delve/cmd/dlv@latest; \
+  go install honnef.co/go/tools/cmd/staticcheck@latest; \
+  go install golang.org/x/tools/gopls@latest; \
+  go clean -cache -modcache;\
+  rm go.tar.gz
