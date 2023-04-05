@@ -14,7 +14,7 @@ add() {
 base() {
   apt-get update && apt-get upgrade -y
   apt-get install -y apt-utils dialog locales
-  apt-get install -y ca-certificates procps iputils-ping iproute2 sudo openssh-client zsh pkg-config
+  apt-get install -y ca-certificates procps iputils-ping iproute2 sudo openssh-client pkg-config
   apt-get install -y curl wget nano git build-essential # netbase gnupg dirmngr
 
   localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
@@ -29,10 +29,11 @@ recovery_root() {
   cp -rf /opt/root /
 }
 
-install_omz() {
+install_zsh() {
+  apt-get install zsh fonts-powerline
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
   sed -i "s/# zstyle ':omz:update' mode disabled/zstyle ':omz:update' mode disabled/g" ~/.zshrc
-  # sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster"/g' ~/.zshrc
+  sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster"/g' ~/.zshrc
   chsh -s "$(which zsh)"
 }
 
@@ -51,7 +52,7 @@ install_php() {
 install_nodejs() {
   curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && apt-get install -y nodejs
   npm remove -g corepack
-  npm install -g pnpm
+  npm install -g npm pnpm @go-task/cli
   npm -g cache clean --force
   rm -rf /root/.npm/_logs/*.log
 }
@@ -69,7 +70,7 @@ update_go() {
 
 init() {
   base
-  install_go 'https://go.dev/dl/go1.20.2.linux-amd64.tar.gz'
+  install_go 'https://go.dev/dl/go1.20.3.linux-amd64.tar.gz'
   install_nodejs
   install_python
   # install_php

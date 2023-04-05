@@ -1,7 +1,7 @@
 FROM debian:latest
 COPY [ "dev.sh", "/opt/" ]
 RUN [ "/bin/bash", "/opt/dev.sh", "init" ]
-ENV LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8 LC_ALL=en_US.UTF-8
-ENV PATH=$PATH:/root/go/bin:/usr/local/go/bin
+# LANGUAGE=en_US.UTF-8 LC_ALL=en_US.UTF-8
+ENV SHELL=/bin/zsh LANG=en_US.UTF-8 PATH=$PATH:/root/go/bin:/usr/local/go/bin
 WORKDIR /root/workspace
 CMD [ "/bin/sleep", "infinity" ]
