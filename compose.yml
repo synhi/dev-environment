@@ -12,7 +12,7 @@ services:
     hostname: "dev"
     network_mode: "bridge"
     environment:
-      - SHELL=/bin/zsh
+      - SHELL=/usr/bin/zsh
       - TZ=Asia/Shanghai
     volumes:
       - workspace:/workspace

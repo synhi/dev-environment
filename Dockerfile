@@ -36,7 +36,8 @@ RUN DEBIAN_FRONTEND=noninteractive; \
 RUN set -eux; \
   localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8; \
   git config --global init.defaultBranch main; \
-  mkdir /workspace
+  mkdir -p /workspace/.vscode-server; \
+  ln -s /workspace/.vscode-server /root/.vscode-server
 
 WORKDIR /workspace
 
@@ -48,8 +49,8 @@ RUN DEBIAN_FRONTEND=noninteractive; \
   apt-get update; \
   apt-get install -y zsh fonts-powerline; \
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended; \
-  sed -i "s/# zstyle ':omz:update' mode disabled/zstyle ':omz:update' mode disabled/g" ~/.zshrc; \
-  sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster"/g' ~/.zshrc; \
+  sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster"/g' /root/.zshrc; \
+  echo "\nzstyle ':omz:update' mode disabled" >>/root/.zshrc ;\
   chsh -s "$(which zsh)"; \
   rm -rf /var/lib/apt/lists/*
 
@@ -84,16 +85,10 @@ RUN DEBIAN_FRONTEND=noninteractive; \
   rm -rf /var/lib/apt/lists/*
 
 # install golang
-ENV PATH=/usr/local/go/bin:/root/go/bin:$PATH
+ENV PATH=/usr/local/go/bin:/workspace/.go/bin:$PATH
 RUN set -eux; \
   wget --quiet "https://go.dev/dl/go1.20.3.linux-amd64.tar.gz" -O go.tar.gz; \
   tar -C /usr/local -xzf go.tar.gz; \
-  go install github.com/cweill/gotests/gotests@v1.6.0; \
-  go install github.com/fatih/gomodifytags@v1.16.0; \
-  go install github.com/josharian/impl@v1.1.0; \
-  go install github.com/haya14busa/goplay/cmd/goplay@v1.0.0; \
-  go install github.com/go-delve/delve/cmd/dlv@latest; \
-  go install honnef.co/go/tools/cmd/staticcheck@latest; \
-  go install golang.org/x/tools/gopls@latest; \
-  go clean -cache -modcache;\
-  rm go.tar.gz
+  mkdir -p /workspace/.go; \
+  go env -w GOPATH=/workspace/.go; \
+  rm -rf go.tar.gz
