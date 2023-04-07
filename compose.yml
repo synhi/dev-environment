@@ -1,9 +1,3 @@
-version: "3.9"
-
-volumes:
-  workspace:
-    name: workspace
-
 services:
   dev:
     image: "ghcr.io/synhi/dev-environment:latest"
@@ -11,8 +5,9 @@ services:
     restart: "unless-stopped"
     hostname: "dev"
     network_mode: "bridge"
-    environment:
-      - SHELL=/usr/bin/zsh
-      - TZ=Asia/Shanghai
     volumes:
       - workspace:/workspace
+
+volumes:
+  workspace:
+    name: workspace

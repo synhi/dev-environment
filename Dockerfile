@@ -43,17 +43,6 @@ WORKDIR /workspace
 
 CMD [ "/bin/sleep", "infinity" ]
 
-# install zsh and ohmyzsh
-RUN DEBIAN_FRONTEND=noninteractive; \
-  set -eux; \
-  apt-get update; \
-  apt-get install -y zsh fonts-powerline; \
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended; \
-  sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster"/g' /root/.zshrc; \
-  echo "\nzstyle ':omz:update' mode disabled" >>/root/.zshrc ;\
-  chsh -s "$(which zsh)"; \
-  rm -rf /var/lib/apt/lists/*
-
 # install python
 RUN DEBIAN_FRONTEND=noninteractive; \
   set -eux; \
@@ -72,6 +61,17 @@ RUN DEBIAN_FRONTEND=noninteractive; \
 #   mv composer.phar /usr/local/bin/composer; \
 #   rm -rf /var/lib/apt/lists/*
 
+# install zsh and ohmyzsh
+RUN DEBIAN_FRONTEND=noninteractive; \
+  set -eux; \
+  apt-get update; \
+  apt-get install -y zsh fonts-powerline; \
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended; \
+  sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster"/g' /root/.zshrc; \
+  echo "\nzstyle ':omz:update' mode disabled" >>/root/.zshrc ;\
+  chsh -s "$(which zsh)"; \
+  rm -rf /var/lib/apt/lists/*
+
 # install nodejs
 RUN DEBIAN_FRONTEND=noninteractive; \
   set -eux; \
@@ -79,7 +79,7 @@ RUN DEBIAN_FRONTEND=noninteractive; \
   apt-get update; \
   apt-get install -y nodejs; \
   npm remove -g corepack; \
-  npm install -g npm pnpm @go-task/cli; \
+  npm install -g npm pnpm; \
   npm -g cache clean --force; \
   rm -rf /root/.npm; \
   rm -rf /var/lib/apt/lists/*
