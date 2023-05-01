@@ -3,12 +3,14 @@ FROM debian:latest
 RUN DEBIAN_FRONTEND=noninteractive; \
   set -eux; \
   apt-get update; \
+  apt-get upgrade; \
   apt-get install -y \
   pkg-config \
   apt-utils \
   dialog \
   locales \
   ; \
+  localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8; \
   rm -rf /var/lib/apt/lists/*
 
 ENV LANG=en_US.UTF-8
@@ -34,7 +36,6 @@ RUN DEBIAN_FRONTEND=noninteractive; \
   rm -rf /var/lib/apt/lists/*
 
 RUN set -eux; \
-  localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8; \
   git config --global init.defaultBranch main; \
   mkdir -p /workspace/.vscode-server; \
   ln -s /workspace/.vscode-server /root/.vscode-server
@@ -68,7 +69,9 @@ RUN DEBIAN_FRONTEND=noninteractive; \
   apt-get install -y zsh fonts-powerline; \
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended; \
   sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster"/g' /root/.zshrc; \
-  echo "\nzstyle ':omz:update' mode disabled" >>/root/.zshrc ;\
+  echo >>/root/.zshrc ;\
+  echo zstyle ':omz:update' mode disabled >>/root/.zshrc ;\
+  echo alias task-update=sh -c '$(curl --location https://taskfile.dev/install.sh)' -- -d -b /workspace/.go/bin >>/root/.zshrc ;\
   chsh -s "$(which zsh)"; \
   rm -rf /var/lib/apt/lists/*
 
