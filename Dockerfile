@@ -68,10 +68,10 @@ RUN DEBIAN_FRONTEND=noninteractive; \
   apt-get update; \
   apt-get install -y zsh fonts-powerline; \
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended; \
-  sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster"/g' /root/.zshrc; \
-  echo '' >>/root/.zshrc ;\
-  echo zstyle ':omz:update' mode disabled >>/root/.zshrc ;\
-  echo alias task-update=sh -c '$(curl --location https://taskfile.dev/install.sh)' -- -d -b /workspace/.go/bin >>/root/.zshrc ;\
+  sed -i 's@ZSH_THEME="robbyrussell"@ZSH_THEME="agnoster"@g' /root/.zshrc; \
+  echo "" >>/root/.zshrc ;\
+  echo "zstyle ':omz:update' mode disabled" >>/root/.zshrc ;\
+  echo "alias task-update='sh -c \"\$(curl --location https://taskfile.dev/install.sh)\" -- -d -b /workspace/.go/bin'" >>/root/.zshrc ;\
   chsh -s "$(which zsh)"; \
   rm -rf /var/lib/apt/lists/*
 
