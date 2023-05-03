@@ -90,7 +90,7 @@ RUN DEBIAN_FRONTEND=noninteractive; \
 # install golang
 ENV PATH=/usr/local/go/bin:/workspace/.go/bin:$PATH
 RUN set -eux; \
-  wget --quiet "https://go.dev/dl/go1.20.3.linux-amd64.tar.gz" -O go.tar.gz; \
+  wget --quiet "https://go.dev/dl/go1.20.4.linux-amd64.tar.gz" -O go.tar.gz; \
   tar -C /usr/local -xzf go.tar.gz; \
   mkdir -p /workspace/.go; \
   go env -w GOPATH=/workspace/.go; \
