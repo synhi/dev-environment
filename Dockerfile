@@ -1,7 +1,7 @@
 FROM debian:latest
 
 RUN DEBIAN_FRONTEND=noninteractive; \
-  set -eux; \
+  set -eu; \
   apt-get update; \
   apt-get upgrade -y; \
   apt-get install -y \
@@ -16,7 +16,7 @@ RUN DEBIAN_FRONTEND=noninteractive; \
 ENV LANG=en_US.UTF-8
 
 RUN DEBIAN_FRONTEND=noninteractive; \
-  set -eux; \
+  set -eu; \
   apt-get update; \
   apt-get install -y \
   ca-certificates \
@@ -35,7 +35,7 @@ RUN DEBIAN_FRONTEND=noninteractive; \
   ; \
   rm -rf /var/lib/apt/lists/*
 
-RUN set -eux; \
+RUN set -eu; \
   git config --global init.defaultBranch main; \
   mkdir -p /workspace/.vscode-server; \
   ln -s /workspace/.vscode-server /root/.vscode-server
@@ -46,14 +46,14 @@ CMD [ "/bin/sleep", "infinity" ]
 
 # install python
 RUN DEBIAN_FRONTEND=noninteractive; \
-  set -eux; \
+  set -eu; \
   apt-get update; \
   apt-get install -y python3 python3-pip; \
   rm -rf /var/lib/apt/lists/*
 
 # install php
 # RUN DEBIAN_FRONTEND=noninteractive; \
-#   set -eux; \
+#   set -eu; \
 #   apt-get update; \
 #   apt-get install -y php-cli php-pear; \
 #   php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"; \
@@ -64,7 +64,7 @@ RUN DEBIAN_FRONTEND=noninteractive; \
 
 # install zsh and ohmyzsh
 RUN DEBIAN_FRONTEND=noninteractive; \
-  set -eux; \
+  set -eu; \
   apt-get update; \
   apt-get install -y zsh fonts-powerline; \
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended; \
@@ -77,7 +77,7 @@ RUN DEBIAN_FRONTEND=noninteractive; \
 
 # install nodejs
 RUN DEBIAN_FRONTEND=noninteractive; \
-  set -eux; \
+  set -eu; \
   curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -; \
   apt-get update; \
   apt-get install -y nodejs; \
@@ -89,7 +89,7 @@ RUN DEBIAN_FRONTEND=noninteractive; \
 
 # install golang
 ENV PATH=/usr/local/go/bin:/workspace/.go/bin:$PATH
-RUN set -eux; \
+RUN set -eu; \
   wget --quiet "https://go.dev/dl/go1.20.4.linux-amd64.tar.gz" -O go.tar.gz; \
   tar -C /usr/local -xzf go.tar.gz; \
   mkdir -p /workspace/.go; \
