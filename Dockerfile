@@ -32,6 +32,8 @@ RUN DEBIAN_FRONTEND=noninteractive; \
   nano \
   git \
   build-essential \
+  bc \
+  jq \
   ; \
   rm -rf /var/lib/apt/lists/*
 
