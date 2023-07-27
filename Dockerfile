@@ -13,7 +13,7 @@ RUN DEBIAN_FRONTEND=noninteractive; \
   localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8; \
   rm -rf /var/lib/apt/lists/*
 
-ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US.UTF-8 LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
 
 RUN DEBIAN_FRONTEND=noninteractive; \
   set -eu; \
