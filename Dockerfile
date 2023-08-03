@@ -13,7 +13,7 @@ RUN DEBIAN_FRONTEND=noninteractive; \
   localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8; \
   rm -rf /var/lib/apt/lists/*
 
-ENV LANGUAGE=en_US.UTF-8 LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+ENV LANGUAGE=en_US.UTF-8 LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 SHELL=/usr/bin/zsh
 
 RUN DEBIAN_FRONTEND=noninteractive; \
   set -eu; \
@@ -92,7 +92,7 @@ RUN DEBIAN_FRONTEND=noninteractive; \
 # install golang
 ENV PATH=/usr/local/go/bin:/workspace/.go/bin:$PATH
 RUN set -eu; \
-  wget --quiet 'https://go.dev/dl/go1.20.6.linux-amd64.tar.gz' -O go.tar.gz; \
+  wget --quiet 'https://go.dev/dl/go1.20.7.linux-amd64.tar.gz' -O go.tar.gz; \
   tar -C /usr/local -xzf go.tar.gz; \
   mkdir -p /workspace/.go; \
   go env -w GOPATH=/workspace/.go; \
