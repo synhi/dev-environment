@@ -70,7 +70,7 @@ RUN DEBIAN_FRONTEND=noninteractive; \
   apt-get update; \
   apt-get install -y zsh fonts-powerline; \
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" '' --unattended; \
-  sed -i 's@ZSH_THEME="robbyrussell"@ZSH_THEME="agnoster"@g' /root/.zshrc; \
+  # sed -i 's@ZSH_THEME="robbyrussell"@ZSH_THEME="agnoster"@g' /root/.zshrc; \
   echo "" >>/root/.zshrc ;\
   echo "zstyle ':omz:update' mode disabled" >>/root/.zshrc ;\
   echo "alias task-update='sh -c \"\$(curl --location https://taskfile.dev/install.sh)\" -- -d -b /workspace/.go/bin'" >>/root/.zshrc ;\
@@ -92,7 +92,7 @@ RUN DEBIAN_FRONTEND=noninteractive; \
 # install golang
 ENV PATH=/usr/local/go/bin:/workspace/.go/bin:$PATH
 RUN set -eu; \
-  wget --quiet 'https://go.dev/dl/go1.20.7.linux-amd64.tar.gz' -O go.tar.gz; \
+  wget --quiet 'https://go.dev/dl/go1.21.0.linux-amd64.tar.gz' -O go.tar.gz; \
   tar -C /usr/local -xzf go.tar.gz; \
   mkdir -p /workspace/.go; \
   go env -w GOPATH=/workspace/.go; \
