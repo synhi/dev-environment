@@ -87,13 +87,11 @@ function nodejs() {
 
 function golang() {
   local GO_VERSION=$1
-  export PATH="/usr/local/go/bin:/workspace/.go/bin:$PATH"
   wget --quiet "https://go.dev/dl/go$GO_VERSION.linux-amd64.tar.gz" -O go.tar.gz
   tar -C /usr/local -xzf go.tar.gz
   rm -rf go.tar.gz
   mkdir -p /workspace/.go
   go env -w GOPATH=/workspace/.go
-  echo "PATH=\"$PATH\"" >>/etc/environment
 }
 
 function task() {
