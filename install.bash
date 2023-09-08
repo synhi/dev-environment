@@ -8,22 +8,14 @@ function clear() {
   rm -rf /var/lib/apt/lists/*
 }
 
-function base() {
+function update() {
   apt-get update
   apt-get upgrade -y
   apt-get install -y apt-utils pkg-config dialog locales
-
   localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+}
 
-  {
-    echo 'LANGUAGE="en_US.UTF-8"'
-    echo 'LC_ALL="en_US.UTF-8"'
-    echo 'LANG="en_US.UTF-8"'
-  } >>/etc/environment
-  set -a
-  source /etc/environment
-  set +a
-
+function base() {
   apt-get install -y \
     ca-certificates \
     netbase \
@@ -54,7 +46,6 @@ function ohmyzsh() {
   } >>/root/.zshrc
   # sed -i 's@ZSH_THEME="robbyrussell"@ZSH_THEME="agnoster"@g' /root/.zshrc; \
   chsh -s "$(which zsh)"
-  echo 'SHELL="/usr/bin/zsh"' >>/etc/environment
 }
 
 function python() {
@@ -92,7 +83,7 @@ function golang() {
 }
 
 function task() {
-  sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /root/.go/bin
+  sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /root/go/bin
   wget --quiet 'https://raw.githubusercontent.com/go-task/task/main/completion/zsh/_task' -O /usr/local/share/zsh/site-functions/_task
 }
 
