@@ -6,8 +6,8 @@ services:
     hostname: "dev"
     network_mode: "bridge"
     volumes:
-      - workspace:/workspace
+      - root:/root
 
 volumes:
-  workspace:
-    name: workspace
+  root:
+    name: dev_root
