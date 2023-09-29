@@ -70,7 +70,6 @@ function nodejs() {
   apt-get install -y nodejs
   npm remove -g corepack
   npm install -g npm pnpm
-  npm -g cache clean --force
   rm -rf /root/.npm
 }
 
