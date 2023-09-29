@@ -82,7 +82,7 @@ function golang() {
 }
 
 function task() {
-  sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /root/go/bin
+  sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin
   wget --quiet 'https://raw.githubusercontent.com/go-task/task/main/completion/zsh/_task' \
     -O /usr/local/share/zsh/site-functions/_task
 }

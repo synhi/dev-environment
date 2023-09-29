@@ -19,3 +19,5 @@ RUN install.bash nodejs ${NODE_MAJOR}
 ARG GO_VERSION=1.21.1
 ENV PATH=/usr/local/go/bin:/root/go/bin:$PATH
 RUN install.bash golang ${GO_VERSION}
+
+RUN install.bash task
