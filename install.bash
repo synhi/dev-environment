@@ -83,10 +83,8 @@ function golang() {
 
 function task() {
   sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /root/go/bin
-
-  local completion_path=/root/.oh-my-zsh/completions
-  [ ! -d $completion_path ] && mkdir -p $completion_path
-  wget --quiet 'https://raw.githubusercontent.com/go-task/task/main/completion/zsh/_task' -O $completion_path/_task
+  wget --quiet 'https://raw.githubusercontent.com/go-task/task/main/completion/zsh/_task' \
+    -O /usr/local/share/zsh/site-functions/_task
 }
 
 # run cmd
