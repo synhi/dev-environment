@@ -4,6 +4,7 @@ services:
     container_name: "dev"
     restart: "unless-stopped"
     hostname: "dev"
+    tty: true
     network_mode: "bridge"
     volumes:
       - root:/root

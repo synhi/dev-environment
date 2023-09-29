@@ -1,6 +1,5 @@
 FROM debian:latest
 WORKDIR /root/workspace
-CMD [ "/bin/sleep", "infinity" ]
 
 COPY --chmod=0744 install.bash /usr/local/bin/
 
