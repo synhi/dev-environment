@@ -14,10 +14,10 @@ ENV SHELL=/usr/bin/zsh
 RUN install.bash python
 
 ARG NODE_MAJOR=18
-RUN install.bash nodejs ${NODE_MAJOR}
+RUN install.bash nodejs $NODE_MAJOR
 
 ARG GO_VERSION=1.21.3
 ENV PATH=/usr/local/go/bin:/root/go/bin:$PATH
-RUN install.bash golang ${GO_VERSION}
+RUN install.bash golang $GO_VERSION
 
 RUN install.bash task
