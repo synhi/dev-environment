@@ -13,7 +13,7 @@ ENV SHELL=/usr/bin/zsh
 
 RUN install.bash python
 
-ARG NODE_MAJOR=18
+ARG NODE_MAJOR=20
 RUN install.bash nodejs $NODE_MAJOR
 
 ARG GO_VERSION=1.21.3
