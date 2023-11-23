@@ -21,3 +21,5 @@ ENV PATH=/usr/local/go/bin:/root/go/bin:$PATH
 RUN install.bash golang $GO_VERSION
 
 RUN install.bash task
+
+RUN install.bash clear
