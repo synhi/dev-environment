@@ -16,7 +16,7 @@ RUN install.bash python
 ARG NODE_MAJOR=20
 RUN install.bash nodejs $NODE_MAJOR
 
-ARG GO_VERSION=1.21.4
+ARG GO_VERSION=1.21.5
 ENV PATH=/usr/local/go/bin:/root/go/bin:$PATH
 RUN install.bash golang $GO_VERSION
 
