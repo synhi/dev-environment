@@ -27,9 +27,13 @@ function base() {
     sudo \
     curl \
     wget \
-    nano \
+    vim-tiny \
     git \
     build-essential \
+    gzip \
+    unzip \
+    zstd \
+    tar \
     bc \
     jq \
     ;
