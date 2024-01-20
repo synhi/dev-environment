@@ -36,6 +36,9 @@ function base() {
     tar \
     bc \
     jq \
+    man \
+    shfmt \
+    shellcheck \
     ;
 
   git config --global init.defaultBranch main
