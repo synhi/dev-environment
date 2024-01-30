@@ -27,6 +27,7 @@ function base() {
     sudo \
     curl \
     wget \
+    ncat \
     vim-tiny \
     git \
     build-essential \
