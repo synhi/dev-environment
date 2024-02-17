@@ -57,7 +57,8 @@ function ohmyzsh() {
 }
 
 function python() {
-  apt-get install -y python3 python3-pip
+  apt-get install -y python3 python3-pip pipx
+  pipx ensurepath
 }
 
 function php() {
