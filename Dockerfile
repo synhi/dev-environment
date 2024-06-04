@@ -1,24 +1,9 @@
 FROM debian:latest
+
 WORKDIR /root/workspace
 
-COPY --chmod=0744 install.bash /usr/local/bin/
+COPY --chmod=0744 install.sh /usr/local/bin/install.sh
 
-RUN install.bash update
+COPY --chmod=0744 init.sh /tmp/init.sh
 
-RUN install.bash base
-
-RUN install.bash ohmyzsh
-ENV SHELL=/usr/bin/zsh
-
-RUN install.bash python
-
-ARG NODE_MAJOR=20
-RUN install.bash nodejs $NODE_MAJOR
-
-ARG GO_VERSION=1.22.3
-ENV PATH=/usr/local/go/bin:/root/go/bin:$PATH
-RUN install.bash golang $GO_VERSION
-
-RUN install.bash task
-
-RUN install.bash clear
+RUN /tmp/init.sh && rm /tmp/init.sh

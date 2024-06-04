@@ -2,57 +2,12 @@
 # shellcheck disable=1091
 set -eu
 
-export DEBIAN_FRONTEND=noninteractive
-
-function clear() {
-  rm -rf /var/lib/apt/lists/*
-}
-
-function update() {
-  apt-get update
-  apt-get upgrade -y
-  apt-get install -y apt-utils pkg-config dialog locales
-  localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
-}
-
-function base() {
-  apt-get install -y \
-    ca-certificates \
-    netbase \
-    gnupg \
-    procps \
-    iputils-ping \
-    iproute2 \
-    openssh-client \
-    sudo \
-    curl \
-    wget \
-    ncat \
-    vim-tiny \
-    git \
-    build-essential \
-    gzip \
-    unzip \
-    zstd \
-    tar \
-    bc \
-    jq \
-    man \
-    shfmt \
-    shellcheck \
-    ;
-
-  git config --global init.defaultBranch main
-}
-
 function ohmyzsh() {
-  apt-get install -y zsh fonts-powerline
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" '' --unattended
   {
-    echo ""
-    echo "zstyle ':omz:update' mode disabled" >>/root/.zshrc
+    echo "# disabled oh-my-zsh update"
+    echo "zstyle ':omz:update' mode disabled"
   } >>/root/.zshrc
-  # sed -i 's@ZSH_THEME="robbyrussell"@ZSH_THEME="agnoster"@g' /root/.zshrc; \
   chsh -s "$(which zsh)"
 }
 
@@ -62,6 +17,7 @@ function python() {
 }
 
 function php() {
+  apt-get update
   apt-get install -y php-cli php-pear
   php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
   php composer-setup.php
@@ -83,11 +39,25 @@ function nodejs() {
 }
 
 function golang() {
-  local GO_VERSION=$1
-  wget --quiet "https://go.dev/dl/go$GO_VERSION.linux-amd64.tar.gz" -O go.tar.gz
-  rm -rf /usr/local/go
-  tar -C /usr/local -xzf go.tar.gz
-  rm -rf go.tar.gz
+  local GO_VERSION="$1"
+  local GO_TMP="/tmp/go.tar.gz"
+  local GO_DES="$HOME/.go"
+  local GO_DIR="$GO_DES/go"
+
+  wget --quiet "https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz" -O $GO_TMP
+  mkdir -p "$GO_DES"
+  rm -rf "$GO_DIR"
+  tar -C "$GO_DES" -xzf $GO_TMP
+  rm -rf "$GO_TMP"
+
+  if type go >/dev/null 2>&1; then
+    return
+  fi
+
+  {
+    echo "export GOPATH=\$HOME/.go"
+    echo "export PATH=\$PATH:\$GOPATH/bin:$GO_DIR/bin"
+  } >>/root/.zshrc
 }
 
 function task() {

@@ -1,0 +1,29 @@
+# https://taskfile.dev
+
+version: "3"
+
+tasks:
+  default:
+    desc: "Show the list of available tasks"
+    cmds:
+      - task --list
+
+  build:
+    desc: "Build the development environment"
+    cmds:
+      - docker build -t shynhan/development:latest .
+
+  dev:up:
+    desc: "Start the development environment"
+    cmds:
+      - docker compose -f compose.dev.yaml up -d
+
+  dev:down:
+    desc: "Stop the development environment"
+    cmds:
+      - docker compose -f compose.dev.yaml down
+
+  dev:enter:
+    desc: "Enter the development environment"
+    cmds:
+      - docker compose -f compose.dev.yaml exec dev bash
