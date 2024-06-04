@@ -9,6 +9,9 @@ services:
     network_mode: "bridge"
     volumes:
       - root:/root
+    environment:
+      - LANG=en_US.UTF-8
+      - SHELL=/usr/bin/zsh
 
 volumes:
   root:

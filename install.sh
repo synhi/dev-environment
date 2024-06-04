@@ -6,14 +6,27 @@ function ohmyzsh() {
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" '' --unattended
   {
     echo "# disabled oh-my-zsh update"
-    echo "zstyle ':omz:update' mode disabled"
+    echo 'zstyle ":omz:update" mode disabled'
+    echo 'export PATH="$HOME/.local/bin:$PATH"'
   } >>/root/.zshrc
   chsh -s "$(which zsh)"
 }
 
 function python() {
-  apt-get install -y python3 python3-pip pipx
-  pipx ensurepath
+  curl https://pyenv.run | bash
+
+  {
+    echo 'export PYENV_ROOT="$HOME/.pyenv"'
+    echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"'
+    echo 'eval "$(pyenv init -)"'
+    echo '# eval "$(pyenv virtualenv-init -)"'
+  } >>/root/.zshrc
+
+  source /root/.zshrc
+  pyenv install 3
+  pyenv global 3
+  python3 -m pip install --user pipx
+  pipx install poetry
 }
 
 function php() {
@@ -26,16 +39,12 @@ function php() {
 }
 
 function nodejs() {
-  local NODE_MAJOR=$1
-  curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key |
-    gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-  echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" |
-    tee /etc/apt/sources.list.d/nodesource.list
-  apt-get update
-  apt-get install -y nodejs
-  npm remove -g corepack
-  npm install -g npm pnpm
-  rm -rf /root/.npm
+  curl -fsSL https://fnm.vercel.app/install | bash
+  source /root/.zshrc
+  fnm use --install-if-missing 20
+  npm rm -g corepack
+  npm install -g pnpm
+  # rm -rf /root/.npm
 }
 
 function golang() {
@@ -61,9 +70,12 @@ function golang() {
 }
 
 function task() {
-  sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin
+  local DES_DIR="$HOME/.oh-my-zsh/custom/plugins/task"
+  mkdir -p "$DES_DIR"
+
+  sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b "$HOME/.go/bin"
   wget --quiet 'https://raw.githubusercontent.com/go-task/task/main/completion/zsh/_task' \
-    -O /usr/local/share/zsh/site-functions/_task
+    -O "$DES_DIR/_task"
 }
 
 # run cmd
