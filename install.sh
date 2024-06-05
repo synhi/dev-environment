@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # shellcheck disable=1091
 set -eu
+shopt -s expand_aliases
+alias zsh="zsh -i -l"
 
 function ohmyzsh() {
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" '' --unattended
@@ -22,11 +24,11 @@ function python() {
     echo '# eval "$(pyenv virtualenv-init -)"'
   } >>/root/.zshrc
 
-  source /root/.zshrc
-  pyenv install 3
-  pyenv global 3
-  python3 -m pip install --user pipx
-  pipx install poetry
+  zsh -c 'pyenv install 3'
+  zsh -c 'pyenv global 3'
+  zsh -c 'python3 -m pip install --user pipx'
+  zsh -c 'pipx install poetry'
+  zsh -c 'pip cache purge'
 }
 
 function php() {
@@ -40,11 +42,9 @@ function php() {
 
 function nodejs() {
   curl -fsSL https://fnm.vercel.app/install | bash
-  source /root/.zshrc
-  fnm use --install-if-missing 20
-  npm rm -g corepack
-  npm install -g pnpm
-  # rm -rf /root/.npm
+  zsh -c 'fnm use --install-if-missing 20'
+  zsh -c 'npm rm -g corepack'
+  zsh -c 'npm install -g pnpm'
 }
 
 function golang() {
