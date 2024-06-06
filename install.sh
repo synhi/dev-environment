@@ -1,8 +1,60 @@
 #!/usr/bin/env bash
-# shellcheck disable=1091
+# shellcheck disable=2016
 set -eu
 shopt -s expand_aliases
 alias zsh="zsh -i -l"
+
+function init() {
+  export DEBIAN_FRONTEND=noninteractive
+
+  # update apt
+  apt-get update
+  apt-get upgrade -y
+  apt-get install -y \
+    apt-utils \
+    pkg-config \
+    dialog \
+    sudo \
+    man \
+    procps \
+    netbase \
+    iproute2 \
+    iputils-ping \
+    locales
+
+  # localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+  echo 'en_US.UTF-8 UTF-8' >/etc/locale.gen
+  locale-gen
+
+  export LANG=en_US.UTF-8
+
+  # install basic tools
+  apt-get install -y \
+    tar \
+    zstd \
+    gzip \
+    unzip \
+    tzdata \
+    build-essential \
+    ca-certificates \
+    openssh-client \
+    gnupg \
+    curl \
+    wget \
+    ncat \
+    zsh \
+    fonts-powerline \
+    vim-tiny \
+    git \
+    bc \
+    jq \
+    shfmt \
+    shellcheck
+
+  rm -rf /var/lib/apt/lists/*
+
+  git config --global init.defaultBranch main
+}
 
 function ohmyzsh() {
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" '' --unattended
@@ -15,6 +67,22 @@ function ohmyzsh() {
 }
 
 function python() {
+  # python build dependencies
+  apt-get update
+  apt-get install -y \
+    libssl-dev \
+    zlib1g-dev \
+    libbz2-dev \
+    libreadline-dev \
+    libsqlite3-dev \
+    libncursesw5-dev \
+    xz-utils \
+    tk-dev \
+    libxml2-dev \
+    libxmlsec1-dev \
+    libffi-dev \
+    liblzma-dev
+
   curl https://pyenv.run | bash
 
   {

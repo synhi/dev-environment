@@ -1,9 +1,9 @@
 FROM debian:latest
 
-WORKDIR /root/workspace
-
 COPY --chmod=0744 install.sh /usr/local/bin/install.sh
 
-COPY --chmod=0744 init.sh /tmp/init.sh
+RUN install.sh init
 
-RUN /tmp/init.sh && rm /tmp/init.sh
+WORKDIR /root/workspace
+
+ENV SHELL=/usr/bin/zsh LANG=en_US.UTF-8
