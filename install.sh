@@ -21,8 +21,8 @@ function golang() {
 function python() {
   pyenv install 3
   pyenv global 3
-  python -m pip install --user --upgrade pipx
-  python -m pip cache purge
+  python3 -m pip install --user --upgrade pipx
+  python3 -m pip cache purge
 }
 
 function nodejs() {

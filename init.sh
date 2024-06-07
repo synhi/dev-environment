@@ -83,7 +83,7 @@ export PATH="$GOPATH/bin:$GOROOT/bin:$PATH"
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
-if [[ -d $PYENV_ROOT/bin ]]; then
+if [[ -d "$PYENV_ROOT/bin" ]]; then
   export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init -)"
   # eval "$(pyenv virtualenv-init -)"
@@ -100,11 +100,11 @@ EOF
 }
 
 function install_fnm() {
-  curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell
+  curl -fsSL "https://fnm.vercel.app/install" | bash -s -- --skip-shell
 }
 
 function install_pyenv() {
-  curl https://pyenv.run | bash
+  curl "https://pyenv.run" | bash
 }
 
 install_base
@@ -116,3 +116,4 @@ install_pyenv
 
 # clean up
 rm -rf /var/lib/apt/lists/*
+rm -rf /tmp/*
