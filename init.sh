@@ -70,7 +70,7 @@ function install_python_deps() {
 function install_ohmyzsh() {
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" '' --unattended
   chsh -s "$(which zsh)"
-  cat >/root/.zshrc <<'EOF'
+  cat >>/root/.zshrc <<'EOF'
 
 # config
 zstyle ":omz:update" mode disabled
@@ -112,6 +112,7 @@ install_tools
 install_python_deps
 install_ohmyzsh
 install_fnm
+install_pyenv
 
 # clean up
 rm -rf /var/lib/apt/lists/*
