@@ -75,27 +75,6 @@ function install_ohmyzsh() {
 # config
 zstyle ":omz:update" mode disabled
 export PATH="$HOME/.local/bin:$PATH"
-
-# golang
-export GOPATH="$HOME/.go"
-export GOROOT="$GOPATH/go"
-export PATH="$GOPATH/bin:$GOROOT/bin:$PATH"
-
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-if [[ -d "$PYENV_ROOT/bin" ]]; then
-  export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init -)"
-  # eval "$(pyenv virtualenv-init -)"
-fi
-
-# fnm
-FNM_PATH="/root/.local/share/fnm"
-if [[ -d "$FNM_PATH" ]]; then
-  export PATH="/root/.local/share/fnm:$PATH"
-  eval "$(fnm env)"
-fi
-
 EOF
 }
 
@@ -107,13 +86,15 @@ function install_pyenv() {
   curl "https://pyenv.run" | bash
 }
 
+function clear() {
+  rm -rf /var/lib/apt/lists/*
+  rm -rf /tmp/*
+}
+
 install_base
 install_tools
 install_python_deps
 install_ohmyzsh
 install_fnm
 install_pyenv
-
-# clean up
-rm -rf /var/lib/apt/lists/*
-rm -rf /tmp/*
+clear
