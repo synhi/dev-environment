@@ -3,7 +3,7 @@ set -eu
 
 SHARE_DIR="$HOME/.local/share"
 if [[ ! -d $SHARE_DIR ]]; then
-  mkdir -p $SHARE_DIR
+  mkdir -p "$SHARE_DIR"
 fi
 
 GOPATH="$HOME/.go"
@@ -32,7 +32,7 @@ function golang() {
 }
 
 function rust() {
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 }
 
 function python() {
