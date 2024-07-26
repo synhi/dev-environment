@@ -46,6 +46,7 @@ function nodejs() {
   fnm install --lts
   fnm default lts-latest
   fnm list
+  echo "fnm uninstall <version> to remove old versions"
 
   npm rm -g corepack
   npm install -g pnpm
