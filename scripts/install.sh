@@ -36,6 +36,7 @@ function rust() {
 }
 
 function python() {
+  pyenv update
   pyenv install 3
   pyenv global 3
   python3 -m pip install --user --upgrade pipx
