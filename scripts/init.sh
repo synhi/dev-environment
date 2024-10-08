@@ -98,8 +98,8 @@ function clear() {
 
 install_base
 install_tools
-install_python_deps
 install_ohmyzsh
+install_python_deps
 install_fnm
 install_pyenv
 clear
