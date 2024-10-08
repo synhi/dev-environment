@@ -39,8 +39,12 @@ function python() {
   pyenv update
   pyenv install 3
   pyenv global 3
+  python3 -m pip uninstall pipx --yes
   python3 -m pip install --user --upgrade pipx
   python3 -m pip cache purge
+
+  echo "pyenv uninstall <version>"
+  pyenv versions
 }
 
 function nodejs() {
@@ -51,6 +55,7 @@ function nodejs() {
 
   npm rm -g corepack
   npm install -g pnpm
+  npm cache clean --force
 }
 
 function php() {
