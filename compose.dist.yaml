@@ -2,6 +2,8 @@ name: dev
 services:
   dev:
     container_name: dev
+    environment:
+      TZ: Asia/Shanghai
     hostname: dev
     image: ghcr.io/synhi/dev-environment:latest
     network_mode: bridge
@@ -14,7 +16,6 @@ services:
       - type: volume
         source: root
         target: /root
-        volume: {}
 volumes:
   root:
     name: dev_root
