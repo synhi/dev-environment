@@ -8,6 +8,7 @@ services:
     tty: true
     network_mode: "bridge"
     volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
       - root:/root
 
 volumes:
