@@ -1,7 +1,9 @@
 FROM debian:latest
 
 COPY --chmod=0744 scripts/init.sh /opt/init.sh
-RUN /opt/init.sh && rm /opt/init.sh
+RUN <<EOF
+/opt/init.sh && rm /opt/init.sh
+EOF
 
 ENV SHELL="/usr/bin/zsh" LANG="en_US.UTF-8"
 WORKDIR /root/workspace
