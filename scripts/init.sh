@@ -3,20 +3,25 @@
 set -eu
 export DEBIAN_FRONTEND=noninteractive
 
+function set_locale() {
+  # localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+  echo 'en_US.UTF-8 UTF-8' >/etc/locale.gen
+  locale-gen
+  export LANG=en_US.UTF-8
+}
+
 function install_base() {
   apt-get update
   apt-get upgrade -y
   apt-get install -y \
+    apt-transport-https \
     apt-utils \
     pkg-config \
     dialog \
     man \
     locales
 
-  # localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
-  echo 'en_US.UTF-8 UTF-8' >/etc/locale.gen
-  locale-gen
-  export LANG=en_US.UTF-8
+  set_locale
 }
 
 function install_tools() {
