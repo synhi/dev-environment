@@ -32,5 +32,6 @@ fi
 # rust
 CARGO_PATH="$HOME/.cargo"
 if [[ -d "$CARGO_PATH" ]]; then
+  # shellcheck disable=SC1091
   . "$HOME/.cargo/env"
 fi
