@@ -1,16 +1,20 @@
 name: dev
 services:
   dev:
-    image: "ghcr.io/synhi/dev-environment:latest"
-    container_name: "dev"
-    restart: "unless-stopped"
-    hostname: "dev"
+    container_name: dev
+    hostname: dev
+    image: ghcr.io/synhi/dev-environment:latest
+    network_mode: bridge
+    restart: unless-stopped
     tty: true
-    network_mode: "bridge"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - root:/root
-
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+      - type: volume
+        source: root
+        target: /root
+        volume: {}
 volumes:
   root:
     name: dev_root
