@@ -26,4 +26,4 @@ tasks:
   dev:enter:
     desc: "Enter the development environment"
     cmds:
-      - docker compose -f compose.dev.yaml exec dev bash
+      - docker compose -f compose.dev.yaml exec dev sh

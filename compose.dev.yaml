@@ -1,6 +1,10 @@
 name: dev_mode
 services:
   dev:
-    image: "debian:latest"
-    network_mode: "bridge"
+    image: docker:cli
+    network_mode: bridge
     tty: true
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
