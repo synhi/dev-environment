@@ -14,8 +14,8 @@ services:
         source: /var/run/docker.sock
         target: /var/run/docker.sock
       - type: volume
-        source: root
-        target: /root
+        source: workspace
+        target: /root/workspace
 volumes:
-  root:
-    name: dev_root
+  workspace:
+    name: workspace
